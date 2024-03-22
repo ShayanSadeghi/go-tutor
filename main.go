@@ -3,14 +3,21 @@ package main
 import (
 	"booking-app/validator"
 	"fmt"
-	"strconv"
 )
 
+type UserData struct {
+	firstName      string
+	lastName       string
+	email          string
+	countOfTickets uint
+}
+
 func main() {
+
 	conferenceName := "GO conference" //declare and assign
 	const totalTickets = 50
 	var remainingTickets uint = 50
-	var bookings = make([]map[string]string, 0) // a slice(list) of maps, with initially 0 length
+	var bookings []UserData
 
 	greetingUser(conferenceName, totalTickets, remainingTickets)
 
@@ -24,12 +31,12 @@ func main() {
 			continue
 		}
 
-		var userData = make(map[string]string) // [key type]value type
-
-		userData["firstName"] = firstName
-		userData["lastName"] = lastName
-		userData["email"] = email
-		userData["countOfTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+		var userData = UserData{
+			firstName:      firstName,
+			lastName:       lastName,
+			email:          email,
+			countOfTickets: userTickets,
+		}
 
 		bookings = append(bookings, userData)
 
@@ -41,5 +48,8 @@ func main() {
 		var firstNames []string = getFirstNames(bookings)
 
 		fmt.Printf("The list of bookings is: %v\n", firstNames)
+
+		fmt.Printf("The bookings are: %v", bookings)
+
 	}
 }

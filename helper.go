@@ -12,11 +12,11 @@ func greetingUser(confName string, totalTickets uint, remainingTickets uint) {
 	fmt.Println("Enjoy the conference!")
 }
 
-func getFirstNames(bookings []map[string]string) []string {
+func getFirstNames(bookings []UserData) []string {
 	firstNames := []string{}
 	for _, booking := range bookings {
 		// var names = strings.Fields(booking)
-		firstNames = append(firstNames, booking["firstName"])
+		firstNames = append(firstNames, booking.firstName)
 	}
 	return firstNames
 }
