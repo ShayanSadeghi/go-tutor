@@ -3,6 +3,7 @@ package main
 import (
 	"booking-app/validator"
 	"fmt"
+	"time"
 )
 
 type UserData struct {
@@ -40,6 +41,8 @@ func main() {
 
 		bookings = append(bookings, userData)
 
+		go sendTicket(userTickets, firstName, lastName, email)
+
 		fmt.Printf("Thank you %v %v. You booked %v tickets. your tickets send to your confirmed email %v\n", firstName, lastName, userTickets, email)
 
 		remainingTickets = remainingTickets - userTickets
@@ -49,7 +52,17 @@ func main() {
 
 		fmt.Printf("The list of bookings is: %v\n", firstNames)
 
-		fmt.Printf("The bookings are: %v", bookings)
+		fmt.Printf("The bookings are: %v\n", bookings)
 
 	}
+}
+
+func sendTicket(ticketsNumber uint, firstName string, lastName string, email string) {
+	time.Sleep(30 * time.Second) // this process takes time to finish
+
+	var ticketData = fmt.Sprintf("%v tickets booked for %v %v\n", ticketsNumber, firstName, lastName) // save formatted text in strting variable
+
+	fmt.Println("###########")
+	fmt.Printf("Ticket\n%v\nis sending to %v\n", ticketData, email)
+	fmt.Println("###########")
 }
