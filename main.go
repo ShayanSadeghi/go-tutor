@@ -1,6 +1,7 @@
 package main
 
 import (
+	"booking-app/validator"
 	"fmt"
 )
 
@@ -15,6 +16,12 @@ func main() {
 	for {
 
 		firstName, lastName, email, userTickets := getUserData()
+		isValidUserData := validator.ValidateData(firstName, lastName, email)
+		isValidTicketNumber := validator.ValidateTickets(remainingTickets, userTickets)
+
+		if !isValidUserData || !isValidTicketNumber {
+			continue
+		}
 
 		bookings = append(bookings, firstName+" "+lastName)
 
