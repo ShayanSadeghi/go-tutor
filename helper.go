@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func greetingUser(confName string, totalTickets uint, remainingTickets uint) {
@@ -13,11 +12,11 @@ func greetingUser(confName string, totalTickets uint, remainingTickets uint) {
 	fmt.Println("Enjoy the conference!")
 }
 
-func getFirstNames(bookings []string) []string {
+func getFirstNames(bookings []map[string]string) []string {
 	firstNames := []string{}
 	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+		// var names = strings.Fields(booking)
+		firstNames = append(firstNames, booking["firstName"])
 	}
 	return firstNames
 }
